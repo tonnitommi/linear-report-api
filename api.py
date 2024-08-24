@@ -2,11 +2,13 @@ import os
 from dotenv import load_dotenv
 import requests
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/api/create-issue', methods=['POST'])
 def create_issue():
@@ -80,4 +82,4 @@ def create_issue():
         return jsonify({"error": response.text}), response.status_code
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=3000)
